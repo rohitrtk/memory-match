@@ -2,11 +2,10 @@
 
 body {
   margin: 0;
-
   font-family: "Yusei Magic", sans-serif;
   font-size: 1.5em;
-
   text-align: center;
-  background: #49a856;
   color: #fff;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }

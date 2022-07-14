@@ -1,0 +1,21 @@
+.game {
+  max-width: 860px;
+  margin: 40px auto;
+
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.card-grid {
+  margin-top: -7%;
+  margin-bottom: -10%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 0.2fr 0.9fr;
+}

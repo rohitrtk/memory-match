@@ -1,6 +1,4 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { CardVariants as Variants } from "./CardVariants";
 
 import "./Card.css";
 
@@ -18,7 +16,39 @@ declare interface IProps {
   disabled?: boolean;
 }
 
-const variants = Variants;
+const variants = {
+  front: {
+    rotateY: 90,
+    transition: {
+      ease: "easeIn",
+      duration: 0.4,
+      delay: 0.2
+    }
+  },
+  back: {
+    rotateY: 0,
+    transition: {
+      ease: "easeIn",
+      duration: 0.4,
+      delay: 0.2
+    }
+  },
+  maxScale: {
+    scale: 1.1,
+    transition: {
+      duration: 0.1
+    }
+  },
+  minScale: {
+    scale: 1,
+    transition: {
+      duration: 0.5
+    }
+  },
+  noScale: {
+    scale: 0
+  }
+};
 
 const Card = (props: IProps) => {
   const { handleChoice, playAudio, flipped, card, disabled } = props;

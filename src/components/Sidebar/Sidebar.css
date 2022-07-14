@@ -1,0 +1,31 @@
+.outer-container {
+  width: 100px;
+  max-width: 100px;
+
+  z-index: 50;
+}
+
+.container {
+  background: #306e38;
+  height: 100vh;
+}
+
+.selections {
+  display: flex;
+  flex-direction: column;
+}
+
+.selections button {
+  margin-bottom: 10px;
+}
+
+.icon {
+  filter: invert(100%);
+  cursor: pointer;
+}
+
+.volume-container {
+  display: flex;
+  justify-content: center;
+  margin: 0.1rem;
+}

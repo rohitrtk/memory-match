@@ -13,3 +13,8 @@ button:hover {
   background: #659dfe;
   color: #fff;
 }
+
+button.selected {
+  background: #fea765;
+  color: #fff;
+}
