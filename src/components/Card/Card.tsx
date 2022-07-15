@@ -48,7 +48,7 @@ const variants = {
   noScale: {
     scale: 0
   }
-};
+}
 
 const Card = (props: IProps) => {
   const { handleChoice, playAudio, flipped, card, disabled } = props;
@@ -56,11 +56,11 @@ const Card = (props: IProps) => {
 
   const handleClick = () => {
     if (!disabled && handleChoice) handleChoice(card);
-  };
+  }
 
   const backToFront = () => {
     if (playAudio) playAudio();
-  };
+  }
 
   return (
     <div className="card" key={id}>
@@ -87,7 +87,7 @@ const Card = (props: IProps) => {
       </div>
     </div>
   );
-};
+}
 
 export default Card;
 

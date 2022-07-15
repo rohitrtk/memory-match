@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { motion, useCycle } from "framer-motion";
+import { BackdropImages, BackdropIndexContext } from "./../Backdrop/Backdrop";
 
 import "./Sidebar.css";
 
@@ -25,11 +26,25 @@ const volumeIconSources = {
 
 const Sidebar = () => {
 
+  const { index, setIndex } = useContext(BackdropIndexContext);
+
   const [music, setMusic] = useState<HTMLAudioElement | null>(null);
   const [volume, setVolume] = useState<number>(0.5);
   const [volumeIcon, setVolumeIcon] = useState(volumeIconSources.enabled);
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
   const [open, cycleOpen] = useCycle(false, true);
+
+  const onVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseInt(e.target.value) / 10;
+
+    if (volume === 0 && newVolume > volume) {
+      setVolumeIcon(volumeIconSources.enabled);
+    } else if (newVolume === 0) {
+      setVolumeIcon(volumeIconSources.disabled);
+    }
+
+    setVolume(newVolume);
+  }
 
   useEffect(() => {
     let subscribed = true;
@@ -51,9 +66,10 @@ const Sidebar = () => {
 
   return (
     <div className="outer-container">
-      <motion.aside initial={{ width: 100 }} animate={open ? { width: 300 } : { width: 100 }}>
+      <motion.aside initial={{ width: 60 }} animate={open ? { width: 300 } : { width: 60 }}>
         <motion.div
           className="container"
+          animate={{ background: BackdropImages[index].sidebarColour }}
           onMouseEnter={() => {
             cycleOpen();
           }}
@@ -63,22 +79,10 @@ const Sidebar = () => {
         >
           {open ?
             <motion.div className="selections">
+              <h2>Music</h2>
               <div className="volume-container">
                 <motion.img className="icon" src={volumeIcon} alt="vol" />
-                <motion.input type="range" min="0" max="10" step="1" defaultValue={volume * 10} className="slider"
-                  onChange={(e) => {
-                    const newVolume = parseInt(e.target.value) / 10;
-
-                    if (volume === 0 && newVolume > volume) {
-                      setVolumeIcon(volumeIconSources.enabled);
-                      console.log("set enabled");
-                    } else if (newVolume === 0) {
-                      setVolumeIcon(volumeIconSources.disabled);
-                      console.log("set disabled");
-                    }
-
-                    setVolume(newVolume);
-                  }} />
+                <motion.input type="range" min="0" max="10" step="1" defaultValue={volume * 10} className="slider" onChange={onVolumeChange} />
               </div>
               {
                 trackList.map(({ name, src }) => {
@@ -86,6 +90,7 @@ const Sidebar = () => {
                     <motion.button
                       key={name}
                       className={selectedButton === name ? "selected" : ""}
+                      whileHover={{ scale: 1.05 }}
                       onClick={(event) => {
                         music?.pause();
                         setMusic(new Audio(src));
@@ -95,6 +100,22 @@ const Sidebar = () => {
                     >
                       {name}
                     </motion.button>
+                  );
+                })
+              }
+              <h2>Background</h2>
+              {
+                BackdropImages.map((image, index) => {
+                  return (
+                    <motion.img
+                      className="thumbnail"
+                      key={`thumbnail_${index}`}
+                      src={image.low}
+                      whileHover={{ scale: 1.05 }}
+                      onClick={() => {
+                        setIndex(index);
+                      }}
+                    />
                   );
                 })
               }
@@ -110,6 +131,6 @@ const Sidebar = () => {
       </motion.aside>
     </div>
   );
-};
+}
 
 export default Sidebar;

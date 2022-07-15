@@ -137,8 +137,10 @@ const Game = () => {
 
   return (
     <div className="game">
-      <h1>Memory Match</h1>
-      <Button text="New Game" onClick={shuffleCards} started={started} />
+      <div className="title-container">
+        <h1>Memory Match</h1>
+        <Button text="New Game" onClick={shuffleCards} started={started} />
+      </div>
 
       {started && (
         <>
@@ -156,9 +158,11 @@ const Game = () => {
               />
             ))}
           </motion.div>
-          <p>
-            Turns: {turn} Score: {score} Streak: {streak}
-          </p>
+          <div className="score-container">
+            <p>
+              Turns: {turn} Score: {score} Streak: {streak}
+            </p>
+          </div>
         </>
       )}
     </div>

@@ -1,3 +1,7 @@
+h2 {
+  margin: 0;
+}
+
 .outer-container {
   width: 100px;
   max-width: 100px;
@@ -5,27 +9,42 @@
   z-index: 50;
 }
 
+/* 306e38 */
 .container {
-  background: #306e38;
+  background: rgb(138, 138, 138);
   height: 100vh;
 }
 
 .selections {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .selections button {
   margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .icon {
   filter: invert(100%);
-  cursor: pointer;
 }
 
 .volume-container {
   display: flex;
   justify-content: center;
   margin: 0.1rem;
+}
+
+.thumbnail {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: auto;
+  height: 180px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  cursor: pointer;
 }
